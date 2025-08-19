@@ -1,11 +1,46 @@
-import ReplyButton from "./ReplyButton";
+import { useContext, useState, useCallback } from "react";
 import VoteButton from "./VoteButton";
-export default function CommentCard({ comment }) {
+import CommentInputBox from "./CommentInputBox";
+import ActionButton from "./ActionButton";
+import ReplyIcon from "../assets/images/icon-reply.svg";
+import EditIcon from "../assets/images/icon-edit.svg";
+import DeleteIcon from "../assets/images/icon-delete.svg";
+import { CommentContext } from "./CommentContext";
+export default function CommentCard({ comment, role }) {
+  const {
+    comments: { currentUser, comments: allComments },
+    handleCommentUpdate,
+  } = useContext(CommentContext);
+  const [replyBoxVisible, setReplyBoxVisible] = useState(false);
   const { score, content, createdAt, user, id } = comment;
+
+  function toggleReplyBox() {
+    setReplyBoxVisible(!replyBoxVisible);
+  }
+
+  const handleCommentDelete = useCallback(() => {
+    const commentToDelete = allComments.find((r) => r.id === id);
+    let updatedComments;
+    if (commentToDelete) {
+      updatedComments = allComments.filter((r) => r.id !== id);
+    }
+
+    if (!commentToDelete) {
+      updatedComments = allComments.map((comment) => {
+        return {
+          ...comment,
+          replies: comment.replies.filter((reply) => reply.id !== id),
+        };
+      });
+    }
+    const newComments = { currentUser, comments: updatedComments };
+    handleCommentUpdate(newComments);
+  }, [allComments, currentUser, handleCommentUpdate, id]);
+
   return (
-    <div className="flex flex-col gap-5 justify-center items-center">
+    <div className="flex flex-col gap-5 justify-center items-center md:w-full">
       <div className="bg-white w-full rounded-[8px] shadow p-4 md:p-8 grid grid-cols-12 gap-4">
-        <div className="col-span-6 md:col-span-1 order-2 md:order-1">
+        <div className="col-span-5 md:col-span-1 order-2 md:order-1">
           <div className="bg-slate-50 shadow rounded-2xl flex flex-row md:flex-col justify-center items-center">
             <VoteButton
               role="up"
@@ -30,23 +65,85 @@ export default function CommentCard({ comment }) {
                 alt=""
                 className="object-contain w-1/6 md:w-1/12"
               />
-              <span className="text-slate-600 font-bold text-[5vw] md:text-[20px]">
+              <span className="text-slate-600 font-bold text-[4vw] md:text-[20px]">
                 {user.username}
               </span>
               <span className="text-slate-400 text-[4vw] md:text-[18px] font-medium">
                 {createdAt}
               </span>
             </div>
-            <ReplyButton view="desktop" />
+            {currentUser.username === user.username && (
+              <div className="flex gap-4">
+                <ActionButton
+                  view="desktop"
+                  onClick={handleCommentDelete}
+                  action={"delete"}
+                  icon={DeleteIcon}
+                  textClasses="text-pink-400"
+                />
+                <ActionButton
+                  view="desktop"
+                  onClick={toggleReplyBox}
+                  action={"edit"}
+                  icon={EditIcon}
+                  textClasses="text-slate-600"
+                />
+              </div>
+            )}
+            {currentUser.username != user.username && (
+              <ActionButton
+                view="desktop"
+                onClick={toggleReplyBox}
+                action={"reply"}
+                icon={ReplyIcon}
+                textClasses="text-purple-600"
+              />
+            )}
           </div>
-          <p className="text-slate-400 font-normal text-[5vw] md:text-[20px]">
+          <p className="text-slate-400 font-normal text-[5vw] md:text-[20px] break-all">
+            {role && role === "reply" && (
+              <span className="text-purple-600">@{comment.replyingTo} </span>
+            )}
             {content}
           </p>
         </div>
-        <div className="col-span-6 order-3 md:hidden flex justify-end">
-          <ReplyButton view="mobile" />
+        <div className="col-span-7 order-3 md:hidden flex justify-end">
+          {currentUser.username === user.username && (
+            <div className="flex gap-4">
+              <ActionButton
+                view="mobile"
+                onClick={handleCommentDelete}
+                action={"delete"}
+                icon={DeleteIcon}
+                textClasses="text-pink-400 text-[14px]"
+              />
+              <ActionButton
+                view="mobile"
+                onClick={toggleReplyBox}
+                action={"edit"}
+                icon={EditIcon}
+                textClasses="text-slate-600 text-[14px]"
+              />
+            </div>
+          )}
+          {currentUser.username != user.username && (
+            <ActionButton
+              view="mobile"
+              onClick={toggleReplyBox}
+              action={"reply"}
+              icon={ReplyIcon}
+              textClasses="text-purple-600"
+            />
+          )}
         </div>
       </div>
+      {replyBoxVisible && (
+        <CommentInputBox
+          role="reply"
+          commentId={id}
+          toggleReplyBox={toggleReplyBox}
+        />
+      )}
       {comment.replies && comment.replies.length > 0 && (
         <div className="grid grid-cols-12 w-full">
           <div className="col-span-1 flex justify-center">
@@ -54,7 +151,13 @@ export default function CommentCard({ comment }) {
           </div>
           <div className="col-span-11 flex flex-col gap-4 justify-center items-center">
             {comment.replies.map((reply) => (
-              <CommentCard key={reply.id} comment={reply} />
+              <CommentCard
+                key={`${reply.id}${
+                  Date.now().toString() + Math.floor(Math.random() * 1000)
+                }`}
+                comment={reply}
+                role={"reply"}
+              />
             ))}
           </div>
         </div>
