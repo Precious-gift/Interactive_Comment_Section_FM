@@ -14,13 +14,13 @@ export default function Modal({ ref, onConfirm }) {
       <div className="flex justify-center md:justify-end gap-4">
         <button
           onClick={() => ref.current.close()}
-          className="uppercase px-2 md:px-4 py-1 md:py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition text-[14px] md:text-[16px]"
+          className="uppercase px-2 md:px-4 py-1 md:py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition text-[14px] md:text-[16px] cursor-pointer"
         >
           No, Cancel
         </button>
         <button
           onClick={onConfirm}
-          className="uppercase px-2 md:px-4 py-1 md:py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-[14px] md:text-[16px]"
+          className="uppercase px-2 md:px-4 py-1 md:py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-[14px] md:text-[16px] cursor-pointer"
         >
           Yes, Delete
         </button>

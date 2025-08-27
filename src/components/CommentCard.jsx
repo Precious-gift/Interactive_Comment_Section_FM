@@ -1,6 +1,7 @@
 import { useContext, useState, useCallback, useRef } from "react";
 import VoteButton from "./VoteButton";
 import CommentInputBox from "./CommentInputBox";
+import InputBox from "./InputBox";
 import ActionButton from "./ActionButton";
 import ReplyIcon from "../assets/images/icon-reply.svg";
 import EditIcon from "../assets/images/icon-edit.svg";
@@ -13,11 +14,16 @@ export default function CommentCard({ comment, role }) {
     handleCommentUpdate,
   } = useContext(CommentContext);
   const [replyBoxVisible, setReplyBoxVisible] = useState(false);
+  const [editBoxVisible, setEditBoxVisible] = useState(false);
   const modalRef = useRef();
   const { score, content, createdAt, user, id } = comment;
 
   function toggleReplyBox() {
     setReplyBoxVisible(!replyBoxVisible);
+  }
+
+  function toggleEditBox() {
+    setEditBoxVisible(!editBoxVisible);
   }
 
   const deleteComment = useCallback(() => {
@@ -91,7 +97,7 @@ export default function CommentCard({ comment, role }) {
                   />
                   <ActionButton
                     view="desktop"
-                    onClick={toggleReplyBox}
+                    onClick={toggleEditBox}
                     action={"edit"}
                     icon={EditIcon}
                     textClasses="text-slate-600"
@@ -108,12 +114,23 @@ export default function CommentCard({ comment, role }) {
                 />
               )}
             </div>
-            <p className="text-slate-400 font-normal text-[5vw] md:text-[20px] break-all">
-              {role && role === "reply" && (
-                <span className="text-purple-600">@{comment.replyingTo} </span>
-              )}
-              {content}
-            </p>
+            {!editBoxVisible && (
+              <p className="text-slate-400 font-normal text-[5vw] md:text-[20px] break-all">
+                {role && role === "reply" && (
+                  <span className="text-purple-600">
+                    @{comment.replyingTo}{" "}
+                  </span>
+                )}
+                {content}
+              </p>
+            )}
+            {editBoxVisible && (
+              <InputBox
+                role={"edit"}
+                toggleReplyBox={toggleEditBox}
+                commentId={id}
+              />
+            )}
           </div>
           <div className="col-span-7 order-3 md:hidden flex justify-end">
             {currentUser.username === user.username && (
@@ -127,7 +144,7 @@ export default function CommentCard({ comment, role }) {
                 />
                 <ActionButton
                   view="mobile"
-                  onClick={toggleReplyBox}
+                  onClick={toggleEditBox}
                   action={"edit"}
                   icon={EditIcon}
                   textClasses="text-slate-600 text-[14px]"
