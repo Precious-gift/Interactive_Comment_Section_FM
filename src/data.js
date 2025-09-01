@@ -1,11 +1,11 @@
-import amyrobson from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-amyrobson.png";
-import juliusomo from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-juliusomo.png";
-import maxblagun from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-maxblagun.png";
-import ramsesmiron from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-ramsesmiron.png";
+import Amyrobson from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-amyrobson.png";
+import Juliusomo from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-juliusomo.png";
+import Maxblagun from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-maxblagun.png";
+import Ramsesmiron from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-ramsesmiron.png";
 const data = {
   currentUser: {
     image: {
-      png: `${juliusomo}`,
+      png: Juliusomo,
       webp: "/avatars/image-juliusomo.webp",
     },
     username: "juliusomo",
@@ -19,7 +19,7 @@ const data = {
       score: 12,
       user: {
         image: {
-          png: `${amyrobson}`,
+          png: Amyrobson,
           webp: "/Interactive_Comment_Section_FM/public/avatars/image-amyrobson.webp",
         },
         username: "amyrobson",
@@ -34,7 +34,7 @@ const data = {
       score: 5,
       user: {
         image: {
-          png: `${maxblagun}`,
+          png: Maxblagun,
           webp: "/src/assets/images/avatars/image-maxblagun.webp",
         },
         username: "maxblagun",
@@ -49,7 +49,7 @@ const data = {
           replyingTo: "maxblagun",
           user: {
             image: {
-              png: `${ramsesmiron}`,
+              png: Ramsesmiron,
               webp: "/src/assets/images/avatars/image-ramsesmiron.webp",
             },
             username: "ramsesmiron",
@@ -64,7 +64,7 @@ const data = {
           replyingTo: "ramsesmiron",
           user: {
             image: {
-              png: `${juliusomo}`,
+              png: Juliusomo,
               webp: "/src/assets/images/avatars/image-juliusomo.webp",
             },
             username: "juliusomo",
