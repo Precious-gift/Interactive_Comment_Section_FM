@@ -1,7 +1,7 @@
-import Amyrobson from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-amyrobson.png";
-import Juliusomo from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-juliusomo.png";
-import Maxblagun from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-maxblagun.png";
-import Ramsesmiron from "/Interactive_Comment_Section_FM/src/assets/images/avatars/image-ramsesmiron.png";
+import Amyrobson from "./assets/images/avatars/image-amyrobson.png";
+import Juliusomo from "./assets/images/avatars/image-juliusomo.png";
+import Maxblagun from "./assets/images/avatars/image-maxblagun.png";
+import Ramsesmiron from "./assets/images/avatars/image-ramsesmiron.png";
 const data = {
   currentUser: {
     image: {
