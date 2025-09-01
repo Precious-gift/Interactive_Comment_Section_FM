@@ -6,7 +6,6 @@ const data = {
   currentUser: {
     image: {
       png: Juliusomo,
-      png: Juliusomo,
       webp: "/avatars/image-juliusomo.webp",
     },
     username: "juliusomo",
@@ -20,7 +19,6 @@ const data = {
       score: 12,
       user: {
         image: {
-          png: Amyrobson,
           png: Amyrobson,
           webp: "/Interactive_Comment_Section_FM/public/avatars/image-amyrobson.webp",
         },
@@ -37,7 +35,6 @@ const data = {
       user: {
         image: {
           png: Maxblagun,
-          png: Maxblagun,
           webp: "/src/assets/images/avatars/image-maxblagun.webp",
         },
         username: "maxblagun",
@@ -53,7 +50,6 @@ const data = {
           user: {
             image: {
               png: Ramsesmiron,
-              png: Ramsesmiron,
               webp: "/src/assets/images/avatars/image-ramsesmiron.webp",
             },
             username: "ramsesmiron",
@@ -68,7 +64,6 @@ const data = {
           replyingTo: "ramsesmiron",
           user: {
             image: {
-              png: Juliusomo,
               png: Juliusomo,
               webp: "/src/assets/images/avatars/image-juliusomo.webp",
             },
