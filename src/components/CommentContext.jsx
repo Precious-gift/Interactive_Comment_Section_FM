@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import commentData from "../data.json";
+//import commentData from "../data.json";
+import data from "../data";
 
 export const CommentContext = createContext({
   comments: {},
@@ -9,7 +10,7 @@ export const CommentContext = createContext({
 export function CommentProvider({ children }) {
   const [comments, setComments] = useState(() => {
     const saved = localStorage.getItem("comments");
-    return saved ? JSON.parse(saved) : commentData;
+    return saved ? JSON.parse(saved) : data;
   });
 
   useEffect(() => {

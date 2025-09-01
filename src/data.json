@@ -1,8 +1,8 @@
 {
   "currentUser": {
     "image": {
-      "png": "/src/assets/images/avatars/image-juliusomo.png",
-      "webp": "/src/assets/images/avatars/image-juliusomo.webp"
+      "png": "/avatars/image-juliusomo.png",
+      "webp": "/avatars/image-juliusomo.webp"
     },
     "username": "juliusomo"
   },
@@ -14,8 +14,8 @@
       "score": 12,
       "user": {
         "image": {
-          "png": "/src/assets/images/avatars/image-amyrobson.png",
-          "webp": "/src/assets/images/avatars/image-amyrobson.webp"
+          "png": "/Interactive_Comment_Section_FM/public/avatars/image-amyrobson.png",
+          "webp": "/Interactive_Comment_Section_FM/public/avatars/image-amyrobson.webp"
         },
         "username": "amyrobson"
       },
